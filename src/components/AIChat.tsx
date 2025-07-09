@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Eye, Paintbrush, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,19 +33,22 @@ const AIChat = () => {
   const artworkAnalysis = [
     { 
       icon: Eye, 
-      text: "Composition Analysis", 
+      title: "Composition Analysis", 
+      description: "AI-powered evaluation of visual balance, focal points, and spatial relationships",
       prompt: "Please analyze the composition of my artwork, focusing on visual balance, focal points, and spatial relationships",
       color: "bg-orange-500" 
     },
     { 
       icon: Palette, 
-      text: "Color Theory", 
+      title: "Color Theory", 
+      description: "Professional insights on color harmony, contrast, and emotional impact",
       prompt: "Provide professional insights on the color harmony, contrast, and emotional impact of my artwork",
       color: "bg-pink-500" 
     },
     { 
       icon: Wrench, 
-      text: "Technical Critique", 
+      title: "Technical Critique", 
+      description: "Detailed feedback on technique, medium usage, and craftsmanship",
       prompt: "Give me detailed feedback on technique, medium usage, and craftsmanship in my artwork",
       color: "bg-indigo-500" 
     },
@@ -147,23 +149,28 @@ const AIChat = () => {
           ))}
         </div>
 
-        {/* Artwork Analysis Shortcuts */}
-        <div className="mb-3">
-          <p className="text-xs text-gray-600 mb-2 font-medium">Artwork Analysis</p>
-          <div className="flex flex-wrap gap-2">
-            {artworkAnalysis.map((analysis, index) => (
+        {/* Artwork Analysis Buttons with Descriptions */}
+        <div className="mb-4 space-y-3">
+          <p className="text-sm font-semibold text-gray-800 mb-3">Artwork Analysis</p>
+          {artworkAnalysis.map((analysis, index) => (
+            <div key={index} className="border rounded-lg p-3 hover:bg-gray-50 transition-colors">
               <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1 text-xs"
+                variant="ghost"
+                className="w-full justify-start p-0 h-auto text-left"
                 onClick={() => setMessage(analysis.prompt)}
               >
-                <analysis.icon className="w-3 h-3" />
-                <span>{analysis.text}</span>
+                <div className="flex items-start space-x-3">
+                  <div className={`p-2 rounded-lg ${analysis.color} flex-shrink-0`}>
+                    <analysis.icon className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium text-gray-900 mb-1">{analysis.title}</h4>
+                    <p className="text-sm text-gray-600">{analysis.description}</p>
+                  </div>
+                </div>
               </Button>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         {uploadedImage && (
