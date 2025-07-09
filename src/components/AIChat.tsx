@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Eye, Paintbrush, Wrench } from "lucide-react";
+import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -29,27 +29,6 @@ const AIChat = () => {
     { icon: Camera, text: "Photography tips", color: "bg-blue-500" },
     { icon: Palette, text: "Design feedback", color: "bg-purple-500" },
     { icon: BookOpen, text: "Skill journey", color: "bg-green-500" },
-  ];
-
-  const artworkAnalysis = [
-    { 
-      icon: Eye, 
-      text: "Composition Analysis", 
-      prompt: "Please analyze the composition of my artwork, focusing on visual balance, focal points, and spatial relationships",
-      color: "bg-orange-500" 
-    },
-    { 
-      icon: Palette, 
-      text: "Color Theory", 
-      prompt: "Provide professional insights on the color harmony, contrast, and emotional impact of my artwork",
-      color: "bg-pink-500" 
-    },
-    { 
-      icon: Wrench, 
-      text: "Technical Critique", 
-      prompt: "Give me detailed feedback on technique, medium usage, and craftsmanship in my artwork",
-      color: "bg-indigo-500" 
-    },
   ];
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,25 +124,6 @@ const AIChat = () => {
               <span>{action.text}</span>
             </Button>
           ))}
-        </div>
-
-        {/* Artwork Analysis Shortcuts */}
-        <div className="mb-3">
-          <p className="text-xs text-gray-600 mb-2 font-medium">Artwork Analysis</p>
-          <div className="flex flex-wrap gap-2">
-            {artworkAnalysis.map((analysis, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1 text-xs"
-                onClick={() => setMessage(analysis.prompt)}
-              >
-                <analysis.icon className="w-3 h-3" />
-                <span>{analysis.text}</span>
-              </Button>
-            ))}
-          </div>
         </div>
 
         {uploadedImage && (
