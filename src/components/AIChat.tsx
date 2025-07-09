@@ -17,7 +17,7 @@ const AIChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi! I'm your Creative Assistant. I'm here to guide you through personalized skill journeys, provide feedback on your work, and connect you with the right community members. What would you like to explore today?",
+      text: "Hi! I'm your Creative Guide. I'm here to guide you through personalized skill journeys, provide feedback on your work, and connect you with the right community members. What would you like to explore today?",
       isAI: true,
       timestamp: new Date(),
     },
@@ -59,7 +59,7 @@ const AIChat = () => {
       <div className="p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50">
         <div className="flex items-center space-x-2">
           <Sparkles className="w-5 h-5 text-purple-600" />
-          <h3 className="font-semibold text-gray-900">AI Creative Mentor</h3>
+          <h3 className="font-semibold text-gray-900">Creative Guide</h3>
         </div>
       </div>
 
@@ -102,7 +102,7 @@ const AIChat = () => {
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Ask your Creative Assistant..."
+            placeholder="Ask your Creative Guide..."
             className="flex-1"
             onKeyPress={(e) => e.key === "Enter" && handleSend()}
           />

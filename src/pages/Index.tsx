@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import AIChat from "@/components/AIChat";
@@ -11,7 +10,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("chat");
 
   const tabs = [
-    { id: "chat", label: "AI Mentor", icon: MessageCircle },
+    { id: "chat", label: "Creative Guide", icon: MessageCircle },
     { id: "journey", label: "My Journey", icon: BookOpen },
     { id: "community", label: "Community", icon: Users },
   ];
@@ -63,7 +62,7 @@ const Index = () => {
               <div className="mt-6 p-4 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg">
                 <h3 className="font-medium text-gray-900 mb-2">Quick Tip</h3>
                 <p className="text-sm text-gray-600">
-                  Start a conversation with your AI mentor to get personalized learning recommendations!
+                  Start a conversation with your Creative Guide to get personalized learning recommendations!
                 </p>
               </div>
             </div>
