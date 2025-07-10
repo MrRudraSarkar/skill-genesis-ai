@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Layout, Eye, Settings } from "lucide-react";
+import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Layout, Eye, Settings, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -16,6 +16,7 @@ interface Message {
 const AIChat = () => {
   const [message, setMessage] = useState("");
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [isAnalysisExpanded, setIsAnalysisExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -193,23 +194,53 @@ const AIChat = () => {
 
         {/* Analysis Options */}
         <div className="mt-4 space-y-3">
-          <h4 className="text-sm font-medium text-gray-700">Artwork Analysis</h4>
-          <div className="grid grid-cols-1 gap-3">
-            {analysisOptions.map((option, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                className="flex items-start space-x-3 h-auto p-3 text-left"
-                onClick={() => setMessage(option.prompt)}
-              >
-                <option.icon className="w-4 h-4 mt-0.5 text-purple-600" />
-                <div className="flex-1">
-                  <div className="font-medium text-sm text-gray-900">{option.title}</div>
-                  <div className="text-xs text-gray-600 mt-1">{option.description}</div>
-                </div>
-              </Button>
-            ))}
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex items-center justify-between w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            onClick={() => setIsAnalysisExpanded(!isAnalysisExpanded)}
+          >
+            <span>Artwork Analysis</span>
+            {isAnalysisExpanded ? (
+              <ChevronUp className="w-4 h-4" />
+            ) : (
+              <ChevronDown className="w-4 h-4" />
+            )}
+          </Button>
+          
+          {isAnalysisExpanded ? (
+            <div className="grid grid-cols-1 gap-3">
+              {analysisOptions.map((option, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  className="flex items-start space-x-3 h-auto p-3 text-left"
+                  onClick={() => setMessage(option.prompt)}
+                >
+                  <option.icon className="w-4 h-4 mt-0.5 text-purple-600" />
+                  <div className="flex-1">
+                    <div className="font-medium text-sm text-gray-900">{option.title}</div>
+                    <div className="text-xs text-gray-600 mt-1">{option.description}</div>
+                  </div>
+                </Button>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {analysisOptions.map((option, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => setMessage(option.prompt)}
+                >
+                  <option.icon className="w-3 h-3 text-purple-600" />
+                  <span className="text-xs">{option.title}</span>
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Card>

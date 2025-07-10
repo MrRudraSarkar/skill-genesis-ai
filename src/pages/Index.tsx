@@ -70,7 +70,7 @@ const Index = () => {
 
           {/* Main Content Area */}
           <div className="lg:col-span-3">
-            <div className="h-[calc(100vh-180px)]">
+            <div className="h-[calc(100vh-140px)]">
               {renderContent()}
             </div>
           </div>
