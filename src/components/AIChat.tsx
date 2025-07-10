@@ -26,13 +26,27 @@ const AIChat = () => {
     },
   ]);
 
-  const quickActions = [
-    { icon: Camera, text: "Photography tips", color: "bg-blue-500" },
-    { icon: Palette, text: "Design feedback", color: "bg-purple-500" },
-    { icon: BookOpen, text: "Skill journey", color: "bg-green-500" },
-  ];
-
-  const analysisOptions = [
+  const creativeTools = [
+    // Quick Actions
+    { 
+      icon: Camera, 
+      title: "Photography Tips", 
+      description: "Get professional photography guidance and composition advice",
+      prompt: "Photography tips"
+    },
+    { 
+      icon: Palette, 
+      title: "Design Feedback", 
+      description: "Receive constructive feedback on your creative designs",
+      prompt: "Design feedback"
+    },
+    { 
+      icon: BookOpen, 
+      title: "Skill Journey", 
+      description: "Personalized learning path recommendations for your growth",
+      prompt: "Skill journey"
+    },
+    // Analysis Options
     {
       icon: Layout,
       title: "Composition Analysis",
@@ -40,7 +54,7 @@ const AIChat = () => {
       prompt: "Please provide a detailed composition analysis of my artwork, focusing on visual balance, focal points, and spatial relationships."
     },
     {
-      icon: Palette,
+      icon: Eye,
       title: "Color Theory",
       description: "Professional insights on color harmony, contrast, and emotional impact",
       prompt: "Please analyze the color theory in my artwork, including color harmony, contrast, and emotional impact."
@@ -133,21 +147,6 @@ const AIChat = () => {
       </div>
 
       <div className="p-4 border-t">
-        <div className="flex space-x-2 mb-3">
-          {quickActions.map((action, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              size="sm"
-              className="flex items-center space-x-1 text-xs"
-              onClick={() => setMessage(action.text)}
-            >
-              <action.icon className="w-3 h-3" />
-              <span>{action.text}</span>
-            </Button>
-          ))}
-        </div>
-
         {uploadedImage && (
           <div className="mb-3 relative inline-block">
             <img 
@@ -192,7 +191,7 @@ const AIChat = () => {
           </Button>
         </div>
 
-        {/* Analysis Options */}
+        {/* Creative Tools */}
         <div className="mt-4 space-y-3 border-t pt-3">
           <Button
             variant="ghost"
@@ -201,8 +200,8 @@ const AIChat = () => {
             onClick={() => setIsAnalysisExpanded(!isAnalysisExpanded)}
           >
             <div className="flex items-center space-x-2">
-              <Palette className="w-4 h-4 text-purple-600" />
-              <span>Artwork Analysis</span>
+              <Sparkles className="w-4 h-4 text-purple-600" />
+              <span>Creative Tools</span>
             </div>
             {isAnalysisExpanded ? (
               <ChevronUp className="w-4 h-4" />
@@ -213,33 +212,33 @@ const AIChat = () => {
           
           {isAnalysisExpanded ? (
             <div className="space-y-2">
-              {analysisOptions.map((option, index) => (
+              {creativeTools.map((tool, index) => (
                 <Button
                   key={index}
                   variant="outline"
                   className="flex items-start space-x-3 h-auto p-3 text-left w-full hover:bg-purple-50 hover:border-purple-200 transition-colors"
-                  onClick={() => setMessage(option.prompt)}
+                  onClick={() => setMessage(tool.prompt)}
                 >
-                  <option.icon className="w-4 h-4 mt-0.5 text-purple-600 flex-shrink-0" />
+                  <tool.icon className="w-4 h-4 mt-0.5 text-purple-600 flex-shrink-0" />
                   <div className="flex-1">
-                    <div className="font-medium text-sm text-gray-900">{option.title}</div>
-                    <div className="text-xs text-gray-600 mt-1 leading-relaxed">{option.description}</div>
+                    <div className="font-medium text-sm text-gray-900">{tool.title}</div>
+                    <div className="text-xs text-gray-600 mt-1 leading-relaxed">{tool.description}</div>
                   </div>
                 </Button>
               ))}
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">
-              {analysisOptions.map((option, index) => (
+              {creativeTools.map((tool, index) => (
                 <Button
                   key={index}
                   variant="outline"
                   size="sm"
                   className="flex items-center space-x-2 hover:bg-purple-50 hover:border-purple-200 transition-colors"
-                  onClick={() => setMessage(option.prompt)}
+                  onClick={() => setMessage(tool.prompt)}
                 >
-                  <option.icon className="w-3 h-3 text-purple-600" />
-                  <span className="text-xs">{option.title}</span>
+                  <tool.icon className="w-3 h-3 text-purple-600" />
+                  <span className="text-xs">{tool.title}</span>
                 </Button>
               ))}
             </div>
