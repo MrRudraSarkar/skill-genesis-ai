@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X } from "lucide-react";
+import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Layout, Eye, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -29,6 +29,27 @@ const AIChat = () => {
     { icon: Camera, text: "Photography tips", color: "bg-blue-500" },
     { icon: Palette, text: "Design feedback", color: "bg-purple-500" },
     { icon: BookOpen, text: "Skill journey", color: "bg-green-500" },
+  ];
+
+  const analysisOptions = [
+    {
+      icon: Layout,
+      title: "Composition Analysis",
+      description: "AI-powered evaluation of visual balance, focal points, and spatial relationships",
+      prompt: "Please provide a detailed composition analysis of my artwork, focusing on visual balance, focal points, and spatial relationships."
+    },
+    {
+      icon: Palette,
+      title: "Color Theory",
+      description: "Professional insights on color harmony, contrast, and emotional impact",
+      prompt: "Please analyze the color theory in my artwork, including color harmony, contrast, and emotional impact."
+    },
+    {
+      icon: Settings,
+      title: "Technical Critique",
+      description: "Detailed feedback on technique, medium usage, and craftsmanship",
+      prompt: "Please provide a technical critique of my artwork, focusing on technique, medium usage, and craftsmanship."
+    }
   ];
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -168,6 +189,27 @@ const AIChat = () => {
           <Button onClick={handleSend} className="bg-gradient-to-r from-purple-500 to-blue-500">
             <Send className="w-4 h-4" />
           </Button>
+        </div>
+
+        {/* Analysis Options */}
+        <div className="mt-4 space-y-3">
+          <h4 className="text-sm font-medium text-gray-700">Artwork Analysis</h4>
+          <div className="grid grid-cols-1 gap-3">
+            {analysisOptions.map((option, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                className="flex items-start space-x-3 h-auto p-3 text-left"
+                onClick={() => setMessage(option.prompt)}
+              >
+                <option.icon className="w-4 h-4 mt-0.5 text-purple-600" />
+                <div className="flex-1">
+                  <div className="font-medium text-sm text-gray-900">{option.title}</div>
+                  <div className="text-xs text-gray-600 mt-1">{option.description}</div>
+                </div>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </Card>
