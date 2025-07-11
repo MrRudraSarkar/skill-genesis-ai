@@ -233,15 +233,15 @@ const AIChat = () => {
               </div>
             </ScrollArea>
           ) : (
-            <ScrollArea className="w-full whitespace-nowrap">
-              <div className="flex space-x-2 pb-2">
+            <div className="overflow-x-auto">
+              <div className="flex space-x-2 pb-2 min-w-max">
                 {creativeTools.map((tool, index) => (
                   <Tooltip key={index}>
                     <TooltipTrigger asChild>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="flex items-center space-x-2 hover:bg-purple-50 hover:border-purple-200 transition-colors flex-shrink-0"
+                        className="flex items-center space-x-2 hover:bg-purple-50 hover:border-purple-200 transition-colors flex-shrink-0 whitespace-nowrap"
                         onClick={() => setMessage(tool.prompt)}
                       >
                         <tool.icon className="w-3 h-3 text-purple-600" />
@@ -249,12 +249,12 @@ const AIChat = () => {
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p className="max-w-xs text-sm">{tool.description}</p>
+                      <p className="max-w-xs text-sm whitespace-normal break-words">{tool.description}</p>
                     </TooltipContent>
                   </Tooltip>
                 ))}
               </div>
-            </ScrollArea>
+            </div>
           )}
         </div>
       </div>
