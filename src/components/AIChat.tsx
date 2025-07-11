@@ -4,6 +4,8 @@ import { Send, Sparkles, Camera, Palette, BookOpen, Upload, X, Layout, Eye, Sett
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Message {
   id: string;
@@ -112,13 +114,14 @@ const AIChat = () => {
   };
 
   return (
-    <Card className="h-full flex flex-col bg-white/50 backdrop-blur-sm">
-      <div className="p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50">
-        <div className="flex items-center space-x-2">
-          <Sparkles className="w-5 h-5 text-purple-600" />
-          <h3 className="font-semibold text-gray-900">Creative Guide</h3>
+    <TooltipProvider>
+      <Card className="h-full flex flex-col bg-white/50 backdrop-blur-sm">
+        <div className="p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50">
+          <div className="flex items-center space-x-2">
+            <Sparkles className="w-5 h-5 text-purple-600" />
+            <h3 className="font-semibold text-gray-900">Creative Guide</h3>
+          </div>
         </div>
-      </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
         {messages.map((msg) => (
@@ -211,41 +214,52 @@ const AIChat = () => {
           </Button>
           
           {isAnalysisExpanded ? (
-            <div className="space-y-2">
-              {creativeTools.map((tool, index) => (
-                <Button
-                  key={index}
-                  variant="outline"
-                  className="flex items-start space-x-3 h-auto p-3 text-left w-full hover:bg-purple-50 hover:border-purple-200 transition-colors"
-                  onClick={() => setMessage(tool.prompt)}
-                >
-                  <tool.icon className="w-4 h-4 mt-0.5 text-purple-600 flex-shrink-0" />
-                  <div className="flex-1">
-                    <div className="font-medium text-sm text-gray-900">{tool.title}</div>
-                    <div className="text-xs text-gray-600 mt-1 leading-relaxed">{tool.description}</div>
-                  </div>
-                </Button>
-              ))}
-            </div>
+            <ScrollArea className="h-32">
+              <div className="space-y-2 pr-4">
+                {creativeTools.map((tool, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    className="flex items-start space-x-3 h-auto p-3 text-left w-full hover:bg-purple-50 hover:border-purple-200 transition-colors"
+                    onClick={() => setMessage(tool.prompt)}
+                  >
+                    <tool.icon className="w-4 h-4 mt-0.5 text-purple-600 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="font-medium text-sm text-gray-900">{tool.title}</div>
+                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{tool.description}</div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </ScrollArea>
           ) : (
-            <div className="flex flex-wrap gap-2">
-              {creativeTools.map((tool, index) => (
-                <Button
-                  key={index}
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center space-x-2 hover:bg-purple-50 hover:border-purple-200 transition-colors"
-                  onClick={() => setMessage(tool.prompt)}
-                >
-                  <tool.icon className="w-3 h-3 text-purple-600" />
-                  <span className="text-xs">{tool.title}</span>
-                </Button>
-              ))}
-            </div>
+            <ScrollArea className="w-full whitespace-nowrap">
+              <div className="flex space-x-2 pb-2">
+                {creativeTools.map((tool, index) => (
+                  <Tooltip key={index}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex items-center space-x-2 hover:bg-purple-50 hover:border-purple-200 transition-colors flex-shrink-0"
+                        onClick={() => setMessage(tool.prompt)}
+                      >
+                        <tool.icon className="w-3 h-3 text-purple-600" />
+                        <span className="text-xs">{tool.title}</span>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="max-w-xs text-sm">{tool.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </div>
+            </ScrollArea>
           )}
         </div>
       </div>
     </Card>
+    </TooltipProvider>
   );
 };
 
